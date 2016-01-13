@@ -10,12 +10,12 @@ The following **required** functionality is complete:
 
 - [x] User can view a list of movies currently playing in theaters from The Movie Database.
 - [x] Poster images are loaded using the UIImageView category in the AFNetworking library.
-- [ ] User sees a loading state while waiting for the movies API.
+- [x] User sees a loading state while waiting for the movies API.
 - [x] User can pull to refresh the movie list.
-- [ ] User sees an error message when there's a networking error.  
 
 The following **optional** features are implemented:
 
+- [ ] User sees an error message when there's a networking error.
 - [ ] Movies are displayed using a CollectionView instead of a TableView.
 - [ ] User can select from a tab bar for either "Now Playing" or "Top Rated" movies.
 - [ ] User can search for a movie.
