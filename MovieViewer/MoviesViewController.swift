@@ -20,7 +20,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var filteredData: [String]!
     
     override func viewDidAppear(animated: Bool) {
-        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 1)
+        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
     }
     
     override func viewDidLoad() {
