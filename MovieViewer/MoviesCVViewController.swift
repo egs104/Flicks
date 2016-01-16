@@ -20,9 +20,9 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     var refreshControl: UIRefreshControl!
     //var movieStrings: [String]?
     
-//    override func viewDidAppear(animated: Bool) {
-//        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-//    }
+    override func viewDidAppear(animated: Bool) {
+        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +30,8 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-        
-//        collectionViewFlowLayout.minimumLineSpacing = 0
-//        collectionViewFlowLayout.minimumInteritemSpacing = 0
-//        collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        // after week 2 uncomment this and get rid of this in viewDidAppear
+        //EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 3)
         
         self.callMovies()
         refreshControl = UIRefreshControl()
