@@ -16,6 +16,7 @@
 		A1A560FD1C3D739900A1EE42 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A560FC1C3D739900A1EE42 /* MovieCell.swift */; };
 		A1C93FEC1C4A8FDB00D254B6 /* MoviesCVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C93FEB1C4A8FDB00D254B6 /* MoviesCVViewController.swift */; };
 		A1C93FEE1C4A909800D254B6 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C93FED1C4A909700D254B6 /* PosterCell.swift */; };
+		A1C93FF01C4AC6FE00D254B6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C93FEF1C4AC6FE00D254B6 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A1A560FC1C3D739900A1EE42 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		A1C93FEB1C4A8FDB00D254B6 /* MoviesCVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesCVViewController.swift; sourceTree = "<group>"; };
 		A1C93FED1C4A909700D254B6 /* PosterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		A1C93FEF1C4AC6FE00D254B6 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				A1C93FEB1C4A8FDB00D254B6 /* MoviesCVViewController.swift */,
 				A1A560F91C3CCE0600A1EE42 /* MoviesViewController.swift */,
+				A1C93FEF1C4AC6FE00D254B6 /* DetailViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				A1A560E81C3CAF7300A1EE42 /* AppDelegate.swift in Sources */,
 				A1C93FEE1C4A909800D254B6 /* PosterCell.swift in Sources */,
 				A1A560FA1C3CCE0600A1EE42 /* MoviesViewController.swift in Sources */,
+				A1C93FF01C4AC6FE00D254B6 /* DetailViewController.swift in Sources */,
 				A1A560FD1C3D739900A1EE42 /* MovieCell.swift in Sources */,
 				A1C93FEC1C4A8FDB00D254B6 /* MoviesCVViewController.swift in Sources */,
 			);

@@ -20,15 +20,17 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     var refreshControl: UIRefreshControl!
     //var movieStrings: [String]?
     
-    override func viewDidAppear(animated: Bool) {
-        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
         
 //        collectionViewFlowLayout.minimumLineSpacing = 0
 //        collectionViewFlowLayout.minimumInteritemSpacing = 0
@@ -72,37 +74,40 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        let posterPath = movie["poster_path"] as! String
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
-        let imageUrl = NSURL(string: baseUrl + posterPath)
+        if let posterPath = movie["poster_path"] as? String {
         
-        //cell.posterImage.setImageWithURL(imageUrl!)
+            let imageUrl = NSURL(string: baseUrl + posterPath)
         
-        let imageRequest = NSURLRequest(URL: imageUrl!)
+            //cell.posterImage.setImageWithURL(imageUrl!)
         
-        cell.posterImage.setImageWithURLRequest(
-            imageRequest,
-            placeholderImage: nil,
-            success: { (imageRequest, imageResponse, image) -> Void in
+            let imageRequest = NSURLRequest(URL: imageUrl!)
+        
+            cell.posterImage.setImageWithURLRequest(
+                imageRequest,
+                placeholderImage: nil,
+                success: { (imageRequest, imageResponse, image) -> Void in
                 
-                // imageResponse will be nil if the image is cached
-                if imageResponse != nil {
-                    print("Image was NOT cached, fade in image")
-                    cell.posterImage.alpha = 0.0
-                    cell.posterImage.image = image
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        cell.posterImage.alpha = 1.0
-                    })
-                } else {
-                    print("Image was cached so just update the image")
-                    cell.posterImage.image = image
-                }
-            },
-            failure: { (imageRequest, imageResponse, error) -> Void in
-                // do something for the failure condition
-        })
+                    // imageResponse will be nil if the image is cached
+                    if imageResponse != nil {
+                        print("Image was NOT cached, fade in image")
+                        cell.posterImage.alpha = 0.0
+                        cell.posterImage.image = image
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            cell.posterImage.alpha = 1.0
+                        })
+                    } else {
+                        print("Image was cached so just update the image")
+                        cell.posterImage.image = image
+                    }
+                },
+                failure: { (imageRequest, imageResponse, error) -> Void in
+                    // do something for the failure condition
+            })
+            
+        }
         
         return cell
     }
@@ -157,14 +162,18 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         })
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPathForCell(cell)
+        let movie = movies![indexPath!.row]
+        
+        let detailViewController = segue.destinationViewController as! DetailViewController
+        detailViewController.movie = movie
+        
     }
-    */
 
 }
