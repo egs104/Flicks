@@ -1,8 +1,8 @@
 //
-//  MoviesViewController.swift
+//  MoviesCVViewController.swift
 //  MovieViewer
 //
-//  Created by Eric Suarez on 1/5/16.
+//  Created by Eric Suarez on 1/16/16.
 //  Copyright © 2016 Eric Suarez. All rights reserved.
 //
 
@@ -10,14 +10,14 @@ import UIKit
 import AFNetworking
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
-    var filteredData: [String]!
     
     override func viewDidAppear(animated: Bool) {
         EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
@@ -26,15 +26,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+//        collectionViewFlowLayout.minimumLineSpacing = 0
+//        collectionViewFlowLayout.minimumInteritemSpacing = 0
+//        collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         self.callMovies()
-        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
-        
+        collectionView.insertSubview(refreshControl, atIndex: 0)
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,27 +46,32 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+//    {
+//        return CGSize(width: collectionView.frame.size.width/2, height: 240)
+//    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let totalwidth = collectionView.bounds.size.width;
+        let numberOfCellsPerRow = 2
+        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
         
-//        if let movies = movies {
-//            return movies.count
-//        } else {
-//            return 0
-//        }
+        return CGSizeMake(dimensions, 250)
+       
+    }
+
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if let movies = movies {
-            return 2
+            return movies.count
         } else {
             return 0
         }
-        
-        
     }
     
-    
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("moviePosterCell", forIndexPath: indexPath) as! PosterCell
         
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
@@ -73,11 +82,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let imageUrl = NSURL(string: baseUrl + posterPath)
         
-        
-        
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        cell.posterImageView.setImageWithURL(imageUrl!)
+        cell.posterImage.setImageWithURL(imageUrl!)
         
         return cell
     }
@@ -101,7 +106,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             NSLog("response: \(responseDictionary)")
                             
                             self.movies = responseDictionary["results"] as! [NSDictionary]
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                             EZLoadingActivity.hide(success: true, animated: true)
                             
                     }
@@ -111,7 +116,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 }
         });
         task.resume()
-
+        
     }
     
     func delay(delay:Double, closure:()->()) {
@@ -129,6 +134,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.refreshControl.endRefreshing()
         })
     }
+
     
 
     /*
