@@ -46,11 +46,6 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         // Dispose of any resources that can be recreated.
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-//    {
-//        return CGSize(width: collectionView.frame.size.width/2, height: 240)
-//    }
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let totalwidth = collectionView.bounds.size.width;
         let numberOfCellsPerRow = 2
@@ -82,7 +77,31 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let imageUrl = NSURL(string: baseUrl + posterPath)
         
-        cell.posterImage.setImageWithURL(imageUrl!)
+        //cell.posterImage.setImageWithURL(imageUrl!)
+        
+        let imageRequest = NSURLRequest(URL: imageUrl!)
+        
+        cell.posterImage.setImageWithURLRequest(
+            imageRequest,
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    print("Image was NOT cached, fade in image")
+                    cell.posterImage.alpha = 0.0
+                    cell.posterImage.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        cell.posterImage.alpha = 1.0
+                    })
+                } else {
+                    print("Image was cached so just update the image")
+                    cell.posterImage.image = image
+                }
+            },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+                // do something for the failure condition
+        })
         
         return cell
     }
