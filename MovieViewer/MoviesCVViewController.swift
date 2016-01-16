@@ -18,6 +18,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
+    //var movieStrings: [String]?
     
     override func viewDidAppear(animated: Bool) {
         EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
@@ -125,7 +126,9 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
                             NSLog("response: \(responseDictionary)")
                             
                             self.movies = responseDictionary["results"] as! [NSDictionary]
+                            //self.movieStrings = responseDictionary["results"] as [[String : AnyObject]]
                             self.collectionView.reloadData()
+                    
                             EZLoadingActivity.hide(success: true, animated: true)
                             
                     }
@@ -153,8 +156,6 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
             self.refreshControl.endRefreshing()
         })
     }
-
-    
 
     /*
     // MARK: - Navigation
