@@ -136,8 +136,8 @@
                                 <rect key="frame" x="-1" y="0.0" width="376" height="668"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yRU-Ig-9VD">
-                                        <rect key="frame" x="0.0" y="1" width="375" height="667"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yRU-Ig-9VD">
+                                        <rect key="frame" x="0.0" y="1" width="376" height="667"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <view alpha="0.80000000000000004" contentMode="scaleToFill" id="zAg-GE-rUT">
@@ -152,7 +152,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DC8-km-M7f">
-                                                <rect key="frame" x="8" y="39" width="359" height="233"/>
+                                                <rect key="frame" x="8" y="39" width="359" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -183,7 +183,7 @@
         <!--Navigation Controller-->
         <scene sceneID="BCB-O8-meb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWI-nH-3i2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoviesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="oWI-nH-3i2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zrb-ci-cbm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

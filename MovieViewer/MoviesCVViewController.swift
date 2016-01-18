@@ -17,7 +17,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
-    //var movieStrings: [String]?
+    var endpoint: String!
     
 //    override func viewDidAppear(animated: Bool) {
 //        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
@@ -27,6 +27,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         super.viewDidLoad()
         
         navigationController!.navigationBar.barTintColor = UIColor.orangeColor()
+        navigationController!.tabBarController?.tabBar.barTintColor = UIColor.orangeColor()
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -113,7 +114,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func callMovies() {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string:"https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
