@@ -15,23 +15,24 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
-    
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
     //var movieStrings: [String]?
     
-    override func viewDidAppear(animated: Bool) {
-        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController!.navigationBar.barTintColor = UIColor.orangeColor()
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
         // after week 2 uncomment this and get rid of this in viewDidAppear
-        //EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 3)
+        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 3)
         
         self.callMovies()
         refreshControl = UIRefreshControl()
@@ -40,6 +41,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
