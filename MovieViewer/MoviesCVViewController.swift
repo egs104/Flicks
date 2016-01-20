@@ -19,15 +19,19 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     var refreshControl: UIRefreshControl!
     var endpoint: String!
     
-//    override func viewDidAppear(animated: Bool) {
-//        EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-//    }
+    override func viewDidAppear(animated: Bool) {
+        //EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
+        
+        // get rid of highlighting before the view appears
+        self.collectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController!.navigationBar.barTintColor = UIColor.orangeColor()
         navigationController!.tabBarController?.tabBar.barTintColor = UIColor.orangeColor()
+        //navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -57,7 +61,6 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         return CGSizeMake(dimensions, 250)
        
     }
-
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -68,8 +71,14 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("moviePosterCell", forIndexPath: indexPath) as! PosterCell
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.grayColor()
+        
+        cell.selectedBackgroundView = backgroundView
         
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
