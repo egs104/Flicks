@@ -21,9 +21,6 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidAppear(animated: Bool) {
         //EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 2)
-        
-        // get rid of highlighting before the view appears
-        self.collectionView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -35,6 +32,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
         
         // after week 2 uncomment this and get rid of this in viewDidAppear
         EZLoadingActivity.showWithDelay("Loading...", disableUI: true, seconds: 3)
@@ -58,7 +56,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         let numberOfCellsPerRow = 2
         let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
         
-        return CGSizeMake(dimensions, 250)
+        return CGSizeMake(dimensions, 300)
        
     }
     
@@ -70,7 +68,6 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
             return 0
         }
     }
-    
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("moviePosterCell", forIndexPath: indexPath) as! PosterCell
@@ -83,6 +80,11 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
+        let rating = movie["vote_average"] as! Double
+        
+        cell.titleLabel.text = title
+        cell.ratingLabel.text = String(rating)
+        cell.titleLabel.sizeToFit()
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
@@ -153,6 +155,10 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         });
         task.resume()
         
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
     }
     
     func delay(delay:Double, closure:()->()) {

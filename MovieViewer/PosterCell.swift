@@ -11,6 +11,8 @@ import UIKit
 class PosterCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
     
     
 }
