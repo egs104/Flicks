@@ -15,6 +15,7 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
     var endpoint: String!
@@ -77,14 +78,21 @@ class MoviesCVViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         cell.selectedBackgroundView = backgroundView
         
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         let rating = movie["vote_average"] as! Double
+        let releaseDate = movie["release_date"] as! String
+        
+        //let formattedDate = dateFormatter.dateFromString(releaseDate)
         
         cell.titleLabel.text = title
         cell.ratingLabel.text = String(rating)
         cell.titleLabel.sizeToFit()
+        cell.releaseDateLabel.text = releaseDate
         
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
