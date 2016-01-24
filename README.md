@@ -43,7 +43,7 @@ I tried to implement search functionality, but I ran into some issues.
 
 **Flicks** is a movies app displaying box office and top rental DVDs using [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **6** hours spent in total
 
 ## User Stories
 
@@ -51,16 +51,16 @@ The following **required** functionality is completed:
 
 - [x] User can view movie details by tapping on a cell.
 - [x] User can select from a tab bar for either **Now Playing** or **Top Rated** movies.
-- [ ] Customize the selection effect of the cell.
+- [x] Customize the selection effect of the cell.
 
 The following **optional** features are implemented:
 
-- [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
-- [ ] Customize the navigation bar.
+- [x] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
+- [x] Customize the navigation bar.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] After selecting a cell, I changed the navigation from push to modal so that the full high res poster can be viewed (without the nav bar) and added an 'x' button to return to the collection view.
 
 ## Video Walkthrough 
 
@@ -72,7 +72,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I tried to figure out search, but I continued to run into problems. My main problem is getting the json data (like a specific movie's title) into an array of Strings or something that would be easier to work with search.
 
 ## License
 
